@@ -1,0 +1,54 @@
+﻿@model IEnumerable<aspFF.Models.Item>
+
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<body style="font-family:'Roboto Slab';font-size: 30px;">
+    <p style="font-size: 50px; font-weight:700; color:black" class="text-center">
+        Kosár
+    </p>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Név</th>
+                <th scope="col">Egységár</th>
+                <th scope="col">Mennyiség</th>
+                <th scope="col">Összár</th>
+                <th scope="col">Törlés kosárból</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Name</th>
+                    <td>@item.Price</td>
+                    <td>@item.Reserved</td>
+                    <td>@item.Multiply()</td>
+                    <td>
+                        <form method="post" action="/Home/DeleteItemFromCart">
+                            <input type="number" value="@item.Id" name="id" hidden />
+                            <button type="submit" class="btn btn-secondary btn">Termék törlése</button>
+                        </form>
+                    </td> 
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form method="post" action="/Home/DeleteCart">
+        <button type="submit" class="btn btn-secondary btn-lg">Kosár törlése</button>
+    </form>
+    <form method="post" action="/Home/Checkout">
+        <p class="text-right"> 
+            <text class="align-middle" style="font-size: 30px; font-weight: 700;">
+            A végösszeg: @if (Model.Count() != 0){ @Model.Sum(x => x.Reserved * x.Price) } else { <a>0</a> } HUF &nbsp;&nbsp;&nbsp;
+            </text>
+            <button type="submit" asp-controller="Home" asp-action="Checkout" class="btn btn-secondary btn-lg">Checkout</button>
+        </p>
+    </form>
+</body>

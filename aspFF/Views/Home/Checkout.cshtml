@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Adatok megadása";
+}
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<body style="font-family:'Roboto Slab';font-size: 30px;">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+    <form method="post" action="/Home/CheckoutData">
+        <div class="form-group">
+            <label for="typeLabel">Név</label>
+            <input type="text" value="@User.Identity.Name" class="form-control" name="Name">
+        </div>
+        <div class="form-group">
+            <label for="nameLabel">Lakcim</label>
+            <input type="text" class="form-control" name="Name">
+        </div>
+        <div class="form-group">
+            <label for="priceLabel">Telefonszám</label>
+            <input type="number" class="form-control" name="Price">
+        </div>
+        <button type="submit" class="btn btn-secondary btn-lg">Véglegesítés</button>
+    </form>
+</body>
+

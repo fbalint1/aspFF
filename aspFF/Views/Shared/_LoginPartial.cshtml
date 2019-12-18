@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<ul class="navbar-nav" style="font-family:'Roboto Slab';font-size: 30px">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name.Split('@').FirstOrDefault()!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("LogoutCartDelete", "Home")">
+                <button type="submit" class="nav-link btn btn-link text-dark" style="font-family:'Roboto Slab'; font-size:30px">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li>
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Cart">
+                <img src='~/cart2.png' onmouseover="this.src='/cart5.png';" onmouseout="this.src='/cart2.png';" />
+            </a>
+        </li>
+    }
+</ul>

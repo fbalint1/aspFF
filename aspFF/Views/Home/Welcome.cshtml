@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center" style="font-family:'Roboto Slab';font-size: 30px">
+        <h1 class="display-4">Üdv!</h1>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <p>A vásárláshoz kérlek jelentkezz be :)</p>
+        }
+        else
+        {
+            <p>A termékek menüpont alatt megtalálod az összes elérhető terméket!</p>
+            <p>Kellemes vásárlást.</p>
+        }
+    </div>
